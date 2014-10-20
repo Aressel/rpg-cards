@@ -18,8 +18,24 @@ page[size="A4"] {
     page-break-after: always;
 }
 
+page[size="US-Letter"] {
+    background: white;
+    width: 216mm;
+    height: 279mm;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 16px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.5);
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    page-break-after: always;
+}
+
 @media print {
-  body, page[size="A4"] {
+  body, page[size="A4"], page[size="US-Letter"] {
     margin: 0;
     box-shadow: 0;
     background-color: white;

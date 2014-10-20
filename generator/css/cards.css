@@ -4,9 +4,6 @@
 }
 
 .card {
-    width:66mm;
-    min-width:66mm;
-    height:95mm;
     border: 2mm solid;
     border-radius: 4px;
     position: relative;
@@ -14,6 +11,18 @@
     flex-direction: column;
     font-family: 'Noto Sans', 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
     font-size: 8pt;
+}
+
+.card-A4 {
+    width:66mm;
+    min-width:66mm;
+    height:95mm;
+}
+
+.card-US-Letter {
+    width:66mm;
+    min-width:66mm;
+    height:89mm;
 }
 
 .content-container {
