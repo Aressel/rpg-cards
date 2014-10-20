@@ -1,0 +1,44 @@
+#header {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+
+#nav {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:300px;
+    width:250px;
+    float:left;
+    padding:5px;
+}
+
+#section {
+    /*width:350px;*/
+    float:left;
+    padding:10px;
+}
+
+#footer {
+    background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px;
+}
+
+/* select with custom icons */
+.ui-selectmenu-menu {
+	height: 100px;
+}
+
+.ui-selectmenu-menu .ui-menu.customicons .ui-menu-item {
+	padding: 0.5em 0 0.5em 3em;
+}
+
+.ui-selectmenu-menu .ui-menu.customicons .ui-menu-item .ui-icon {
+	height: 24px;
+	width: 24px;
+	top: 0.1em;
+}

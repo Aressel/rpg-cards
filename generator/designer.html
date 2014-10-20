@@ -1,0 +1,58 @@
+<html>
+<head>
+    <title>Card Designer</title>
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="css/designer.css">
+    <link rel="stylesheet" type="text/css" href="css/page.css">
+    <link rel="stylesheet" type="text/css" href="css/cards.css">
+    <link rel="stylesheet" type="text/css" href="css/icons.css">
+    <link rel="stylesheet" type="text/css" href="css/custom-icons.css">
+    <!-- Data -->
+    <script type="text/javascript" src="data/card_data.js"></script>
+    <script type="text/javascript" src="data/card_data_example.js"></script>
+    <!-- Javascript -->
+    <script type="text/javascript" defer src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" defer src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" defer src="js/cards.js"></script>
+    <!-- Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lora:700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+<div id="header">
+<h1>Card Designer</h1>
+</div>
+
+<div id="nav">
+	<div>Background Color</div>
+	<select name="backgroundcolor" id="backgroundcolor" style="width:250px">
+		<!--<option value="red" data-class="video">Red</option>
+		<option value="blue">Blue</option>
+		<option value="green" selected="selected">Green</option>
+		<option value="grey">Grey</option>
+		<option value="black">Black</option>-->
+	</select>
+</div>
+
+<div id="section">
+	<div id="preview" style="border: 1px solid black; padding: 10px">
+		<div style="float:left; margin: 10px">
+			<div id="front"></div>
+			<div style="padding-top: 5px">Front</div>
+		</div>
+		<div style="float:left; margin: 10px">
+			<div id="back"></div>
+			<div style="padding-top: 5px">Back</div>
+		</div>
+		<div style="clear: both;"></div>
+	</div>
+</div>
+
+<div id="footer">
+Something Interesting Here
+</div>
+<script type="text/javascript" defer src="js/designer.js"></script>
+</body> 
+</html>

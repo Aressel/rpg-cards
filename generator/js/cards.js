@@ -6,7 +6,7 @@ function card_default_options() {
         default_color: "black",
         default_icon: "ace",
         default_title_size: "normal",
-        page_size: "A4",
+        page_size: "US-Letter",
         page_rows: 3,
         page_columns: 3,
         icon_inline: true
@@ -310,5 +310,31 @@ function card_pages_insert_into(card_data, container) {
 
     // Insert the HTML
     var html = card_pages_generate_html(card_data);
+    container.innerHTML = html;
+}
+
+function card_insert_front_into(card_data, container, options) {
+	options = options || card_default_options();
+    
+    // Clear the previous content of the document
+    while (container.hasChildNodes()) {
+        container.removeChild(container.lastChild);
+    }
+
+    // Insert the HTML
+    var html = card_generate_front(card_data, options);
+    container.innerHTML = html;
+}
+
+function card_insert_back_into(card_data, container, options) {
+	options = options || card_default_options();
+	
+    // Clear the previous content of the document
+    while (container.hasChildNodes()) {
+        container.removeChild(container.lastChild);
+    }
+
+    // Insert the HTML
+    var html = card_generate_back(card_data, options);
     container.innerHTML = html;
 }
