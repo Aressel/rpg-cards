@@ -141,6 +141,45 @@ var cardColors = [
     {val : "white", text: "White"}
 ];
 
+var cardIcons = [
+	{val : "disabled", text: "--- Weapons ---"},
+	{val : "custom-wand", text: "Wand", icon: "img/crystal-wand.png"},
+	{val : "custom-swords", text: "Sword", icon: "img/crossed-swords.png"},
+	{val : "custom-arrows", text: "Arrow", icon: "img/target-arrows.png"},
+	{val : "custom-swordarrow", text: "Sword + Arrow", icon: "img/mixed-swords.png"},
+	{val : "disabled", text: "--- Armor ---"},
+	{val : "custom-armor-light", text: "Light Armor", icon: "img/leather-vest.png"},
+	{val : "custom-armor-medium", text: "Medium Armor", icon: "img/lamellar.png"},
+	{val : "custom-armor-heavy", text: "Heavy Armor", icon: "img/breastplate.png"},
+	{val : "custom-shield", text: "Shield", icon: "img/round-shield.png"},
+	{val : "disabled", text: "--- Equipment ---"},
+	{val : "custom-potion", text: "Potion", icon: "img/drink-me.png"},
+	{val : "custom-light", text: "Light", icon: "img/candle-flame.png"},
+	{val : "custom-flask", text: "Flask", icon: "img/fizzing-flask.png"},
+	{val : "custom-vial", text: "Vial", icon: "img/chemical-drop.png"},
+	{val : "custom-poison", text: "Poison", icon: "img/poison-bottle.png"},
+	{val : "custom-trap", text: "Trap", icon: "img/wolf-trap.png"},
+	{val : "custom-item", text: "Item", icon: "img/knapsack.png"},
+	{val : "disabled", text: "--- Spells ---"},
+	{val : "custom-spell", text: "Blank Spell", icon: "img/white-book.png"},
+	{val : "custom-spell-0", text: "Level 0 Spell", icon: "img/white-book-0.png"},
+	{val : "custom-spell-1", text: "Level 1 Spell", icon: "img/white-book-1.png"},
+	{val : "custom-spell-2", text: "Level 2 Spell", icon: "img/white-book-2.png"},
+	{val : "custom-spell-3", text: "Level 3 Spell", icon: "img/white-book-3.png"},
+	{val : "custom-spell-4", text: "Level 4 Spell", icon: "img/white-book-4.png"},
+	{val : "custom-spell-5", text: "Level 5 Spell", icon: "img/white-book-5.png"},
+	{val : "custom-spell-6", text: "Level 6 Spell", icon: "img/white-book-6.png"},
+	{val : "custom-spell-7", text: "Level 7 Spell", icon: "img/white-book-7.png"},
+	{val : "custom-spell-8", text: "Level 8 Spell", icon: "img/white-book-8.png"},
+	{val : "custom-spell-9", text: "Level 9 Spell", icon: "img/white-book-9.png"},
+	{val : "custom-spell-holy", text: "Holy Spell", icon: "img/white-book-cd.png"},
+	{val : "custom-spell-runes", text: "Runes Spell", icon: "img/book-cover.png"},
+	{val : "disabled", text: "--- Classes ---"},
+	{val : "custom-class-arcane", text: "Arcane Spellcaster", icon: "img/robe.png"},
+	{val : "custom-class-cleric", text: "Cleric", icon: "img/holy-symbol.png"},
+	{val : "custom-class-rogue", text: "Rogue", icon: "img/cloak-dagger.png"},
+];
+
 var activeCard = {
 	"count": 1,
 	"color": "Maroon",
@@ -175,18 +214,25 @@ function refreshPreview(card)
 }
 
 $(function() {
+	$('#cardtitle').on('input', function() {
+    	activeCard.title = $('#cardtitle').val(); 
+		refreshPreview(activeCard);
+	});
+	
 	$.widget( "custom.iconselectmenu", $.ui.selectmenu, {
 		_renderItem: function( ul, item ) {
 			var li = $( "<li>", { text: item.label } );
-		
-			if ( item.disabled ) {
+			
+			if ( item.disabled || item.value === "disabled") {
 				li.addClass( "ui-state-disabled" );
 			}
-		
-			$( "<span>", {
-				style: item.element.attr( "data-style" ),
-				"class": "ui-icon"
-			}).appendTo( li );
+			else
+			{
+				$( "<span>", {
+					style: item.element.attr( "data-style" ),
+					"class": "ui-icon"
+				}).appendTo( li );
+			}
 		
 			return li.appendTo( ul );
 		}
@@ -214,8 +260,62 @@ $(function() {
 		}
 	});
 	
+	$(cardIcons).each(function() {
+		$( "#fronticon" ).append($("<option>").attr('value',this.val).attr('data-style', 'background: dimgrey url("' + this.icon + '") no-repeat 0 0; background-size: 100% 100%;').text(this.text));
+		$( "#backicon" ).append($("<option>").attr('value',this.val).attr('data-style', 'background: dimgrey url("' + this.icon + '") no-repeat 0 0; background-size: 100% 100%;').text(this.text));
+	});
+	
+	$( "#fronticon" ).iconselectmenu({
+		open: function( event, data ) {
+			previewCard = jQuery.extend(true, {}, activeCard);
+			$( "#fronticon-menu" ).css("height", "200px");
+		},
+		focus: function( event, data ) {
+			previewCard.icon = data.item.value.toLowerCase(); 
+			refreshPreview(previewCard);
+		},
+		change: function( event, data ) {
+			activeCard.icon = data.item.value.toLowerCase(); 
+			refreshPreview(activeCard);
+		},
+		close: function( event, data ) {
+			refreshPreview(activeCard);
+		}
+	});
+	
+	$( "#backicon" ).iconselectmenu({
+		open: function( event, data ) {
+			previewCard = jQuery.extend(true, {}, activeCard);
+			$( "#backicon-menu" ).css("height", "200px");
+		},
+		focus: function( event, data ) {
+			previewCard.icon_back = data.item.value.toLowerCase(); 
+			refreshPreview(previewCard);
+		},
+		change: function( event, data ) {
+			activeCard.icon_back = data.item.value.toLowerCase(); 
+			refreshPreview(activeCard);
+		},
+		close: function( event, data ) {
+			refreshPreview(activeCard);
+		}
+	});
+	
+	$( "#cardtitle" ).val(activeCard.title);
 	$( "#backgroundcolor" ).val(activeCard.color.toLowerCase());
 	$( "#backgroundcolor" ).iconselectmenu("refresh");
+	$( "#fronticon" ).val(activeCard.icon.toLowerCase());
+	$( "#fronticon" ).iconselectmenu("refresh");
+	if (activeCard.icon_back)
+	{
+		$( "#backicon" ).val(activeCard.icon_back.toLowerCase());
+		$( "#backicon" ).iconselectmenu("refresh");
+	}
+	else
+	{
+		$( "#backicon" ).val(activeCard.icon.toLowerCase());
+		$( "#backicon" ).iconselectmenu("refresh");
+	}
 });
 
 refreshPreview(activeCard);
